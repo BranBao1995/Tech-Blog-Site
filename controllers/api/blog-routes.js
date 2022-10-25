@@ -3,33 +3,47 @@ const { Blog, Comment, User } = require("../../models");
 
 // GET one blog
 router.get("/:id", async (req, res) => {
-  //   try {
-  //     const dbGalleryData = await Gallery.findByPk(req.params.id, {
-  //       include: [
-  //         {
-  //           model: Painting,
-  //           attributes: [
-  //             "id",
-  //             "title",
-  //             "artist",
-  //             "exhibition_date",
-  //             "filename",
-  //             "description",
-  //           ],
-  //         },
-  //       ],
-  //     });
-  //     const gallery = dbGalleryData.get({ plain: true });
-  //     res.render("gallery", { gallery, loggedIn: req.session.loggedIn });
-  //   } catch (err) {
-  //     console.log(err);
-  //     res.status(500).json(err);
-  //   }
+  try {
+    const dbBlogData = await Blog.findByPk(req.params.id, {
+      include: [
+        {
+          model: Comment,
+          attributes: ["content", "creation_date"],
+        },
+      ],
+    });
+    const blogs = dbBlogData.get({ plain: true });
+    // res.render("gallery", { gallery, loggedIn: req.session.loggedIn });
+    res.status(200).json(dbBlogData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 // POST one blog
-router.post("/", async (req, res) => {});
+router.post("/", async (req, res) => {
+  try {
+    const dbBlogData = await Blog.create(req.body);
+    res.status(200).json(dbBlogData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 // DELETE one blog
-router.delete("/:id", async (req, res) => {});
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedData = await Blog.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    res.status(200).json(deletedData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

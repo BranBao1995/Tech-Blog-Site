@@ -2,34 +2,42 @@ const router = require("express").Router();
 const { Blog, Comment, User } = require("../../models");
 
 // GET all comments
-router.get("/comments/", async (req, res) => {
-  //   try {
-  //     const dbGalleryData = await Gallery.findByPk(req.params.id, {
-  //       include: [
-  //         {
-  //           model: Painting,
-  //           attributes: [
-  //             "id",
-  //             "title",
-  //             "artist",
-  //             "exhibition_date",
-  //             "filename",
-  //             "description",
-  //           ],
-  //         },
-  //       ],
-  //     });
-  //     const gallery = dbGalleryData.get({ plain: true });
-  //     res.render("gallery", { gallery, loggedIn: req.session.loggedIn });
-  //   } catch (err) {
-  //     console.log(err);
-  //     res.status(500).json(err);
-  //   }
+router.get("/", async (req, res) => {
+  try {
+    const dbCommentData = await Comment.findAll();
+    const comments = dbCommentData.map((comment) =>
+      comment.get({ plain: true })
+    );
+    // res.render("gallery", { gallery, loggedIn: req.session.loggedIn });
+    res.status(200).json(dbCommentData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 // POST one comment
-router.post("/comments", async (req, res) => {});
+router.post("/", async (req, res) => {
+  try {
+    const dbCommentData = await Comment.create(req.body);
+    res.status(200).json(dbCommentData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 // DELETE one comment
-router.delete("/comments/:id", async (req, res) => {});
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedData = await Comment.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    res.status(200).json(deletedData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;
