@@ -9,13 +9,17 @@ router.post("/", async (req, res) => {
       password: req.body.password,
     });
 
-    // req.session.save(() => {
-    //   req.session.loggedIn = true;
-
-    //   res.status(200).json(dbUserData);
-    // });
-
-    res.status(200).json(dbUserData);
+    req.session.save(() => {
+      req.session.loggedIn = true;
+      req.session.username = dbUserData.username;
+      req.session.userId = dbUserData.id;
+      // res.render("main", {
+      //   loggedInUser,
+      // });
+      res
+        .status(200)
+        .json({ user: dbUserData, message: "You are now logged in!" });
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -46,32 +50,72 @@ router.post("/login", async (req, res) => {
         .json({ message: "Incorrect email or password. Please try again!" });
       return;
     }
-
-    // req.session.save(() => {
-    //   req.session.loggedIn = true;
-
-    //   res
-    //     .status(200)
-    //     .json({ user: dbUserData, message: 'You are now logged in!' });
-    // });
-    res
-      .status(200)
-      .json({ user: dbUserData, message: "You are now logged in!" });
+    // loggedInUser = dbUserData.get({ plain: true });
+    req.session.save(() => {
+      req.session.loggedIn = true;
+      req.session.username = dbUserData.username;
+      req.session.userId = dbUserData.id;
+      // res.render("main", {
+      //   loggedInUser,
+      // });
+      res
+        .status(200)
+        .json({ user: dbUserData, message: "You are now logged in!" });
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-// Logout
-// router.post("/logout", (req, res) => {
-//   if (req.session.loggedIn) {
-//     req.session.destroy(() => {
-//       res.status(204).end();
-//     });
-//   } else {
-//     res.status(404).end();
-//   }
-// });
+//Logout
+router.post("/logout", (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
+// get currently logged in user
+router.get("/current-user", (req, res) => {
+  // try {
+  //   const dbBlogData = await Blog.findByPk(req.params.id, {
+  //     include: [
+  //       {
+  //         model: User,
+  //         attributes: ["username"],
+  //       },
+  //     ],
+  //   });
+  //   const blog = dbBlogData.get({ plain: true });
+
+  //   const dbCommentData = await Comment.findAll({
+  //     where: {
+  //       blog_id: req.params.id,
+  //     },
+  //     include: [
+  //       {
+  //         model: User,
+  //         attributes: ["username"],
+  //       },
+  //     ],
+  //   });
+
+  //   const comments = dbCommentData.map((comment) =>
+  //     comment.get({ plain: true })
+  //   );
+
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).json(err);
+  // }
+  res.status(200).json({
+    id: req.session.id,
+    loggedIn: req.session.loggedIn,
+  });
+});
 
 module.exports = router;

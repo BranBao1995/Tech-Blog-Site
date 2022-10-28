@@ -1,0 +1,84 @@
+<main class="blogPost-page">
+
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-list-item"><a href="/">Home</a></li>
+
+      {{#if loggedIn}}
+        {{! <li class="nav-list-item"><button id="dashboard">Dashboard</button></li> }}
+        <li class="nav-list-item"><a
+            href="/api/dashboard/{{loggedInId}}"
+          >Dashboard</a></li>
+        <li class="nav-list-item"><button id="logout">Logout</button></li>
+      {{else}}
+        <li class="nav-list-item"><a href="/login">Login/Signup</a></li>
+      {{/if}}
+    </ul>
+    <h1>The Tech Blog</h1>
+  </nav>
+
+  <section class="blog">
+
+    <div class="blog-body">
+      <h2>
+        <span class="blog-title">{{blog.title}}</span>
+        {{#ifEqual blog.user_id loggedInId}}
+          <span class="delete-blog">
+            <button
+              id="delete-blog-button"
+              data-blogId="{{blog.id}}"
+            >Delete</button>
+          </span>
+        {{/ifEqual}}
+      </h2>
+      <h3>Posted by {{blog.user.username}} on {{blog.creation_date}}</h3>
+      <p>{{blog.content}}</p>
+    </div>
+
+    <div class="comments">
+      <h2>Related Comments</h2>
+      {{#each comments as |comment|}}
+        <div class="comment">
+          <header>
+            <span class="comment-info">Posted on
+              {{creation_date}}
+              by
+              {{user.username}}</span>
+            {{#ifEqual user_id loggedInId}}
+              <span class="delete-comment">
+                <button
+                  id="delete-comment-button"
+                  data-commentId="{{id}}"
+                  data-blogId="{{blog.id}}"
+                >Delete</button>
+              </span>
+              <script src="/js/deleteComment.js"></script>
+            {{/ifEqual}}
+          </header>
+          <p>{{content}}</p>
+        </div>
+      {{/each}}
+    </div>
+
+    {{#if loggedIn}}
+      <form class="comment-submit" data-blogId="{{blog.id}}">
+        <div class="form-field">
+          <label for="comment-field">Enter your comment here</label>
+          <input type="text" id="comment-field" />
+        </div>
+        <button id="comment-submit-button" type="submit">Submit</button>
+      </form>
+    {{else}}
+      <a href="/login" class="login-message">Please login first to write a
+        comment.</a>
+    {{/if}}
+  </section>
+</main>
+
+{{#if loggedIn}}
+  <script src="/js/blogPost.js"></script>
+{{/if}}
+
+{{#ifEqual blog.user.id loggedInId}}
+  <script src="/js/deleteBlog.js"></script>
+{{/ifEqual}}

@@ -13,32 +13,40 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Sets up session and connect to our Sequelize db
-// const sess = {
-//   secret: "Super secret secret",
+const sess = {
+  secret: "Super secret secret",
 
-//   cookie: {
-//     maxAge: 60 * 60 * 1000,
+  cookie: {
+    maxAge: 5000000,
 
-//     httpOnly: true,
+    httpOnly: true,
 
-//     secure: false,
+    secure: false,
 
-//     sameSite: "strict",
-//   },
-//   resave: false,
-//   saveUninitialized: true,
-//   // Sets up session store
-//   store: new SequelizeStore({
-//     db: sequelize,
-//   }),
-// };
+    sameSite: "strict",
+  },
+  resave: false,
+  saveUninitialized: true,
+  // Sets up session store
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
 
-// app.use(session(sess));
+app.use(session(sess));
 
 const hbs = exphbs.create({ helpers });
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
+
+hbs.handlebars.registerHelper("ifEqual", function (var1, var2, options) {
+  if (var1 === var2) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -19,7 +19,10 @@ router.get("/", async (req, res) => {
 // POST one comment
 router.post("/", async (req, res) => {
   try {
-    const dbCommentData = await Comment.create(req.body);
+    const dbCommentData = await Comment.create({
+      ...req.body,
+      user_id: req.session.userId,
+    });
     res.status(200).json(dbCommentData);
   } catch (err) {
     res.status(400).json(err);

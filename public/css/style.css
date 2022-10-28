@@ -1,0 +1,192 @@
+/* log out button */
+#logout {
+  color: black;
+  background: none;
+  cursor: pointer;
+  border: none;
+  width: 100px;
+  padding: 0;
+  font-size: 16px;
+}
+
+.nav {
+  padding: 40px 50px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+.login-main {
+  margin-top: 60px;
+  padding: 30px 60px;
+
+  display: flex;
+  flex-direction: row;
+  column-gap: 50px;
+
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.signup {
+  width: 40%;
+  padding: 50px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+}
+
+.login {
+  width: 40%;
+  padding: 50px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+}
+
+#signup-form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+}
+
+#login-form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+}
+
+.form-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 15px;
+}
+
+.form-field input {
+  width: 60%;
+}
+
+.blogs-display-home {
+  margin-top: 60px;
+  padding: 30px 60px;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+  align-items: center;
+}
+
+.blog-card {
+  width: 70%;
+}
+
+.blog-link {
+  padding: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+
+  transition: all 0.5s;
+}
+
+.blog-link:hover {
+  border: 1px solid black;
+}
+
+.blog-link h1 {
+  font-size: 250%;
+}
+
+.blogs-display-dashboard {
+  margin-top: 60px;
+  padding: 30px 60px;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+  align-items: center;
+}
+
+.blog {
+  margin-top: 60px;
+  padding: 30px 60px;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+  align-items: center;
+}
+
+.blog-body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+
+.blog-body h2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blog-title {
+  font-size: 250%;
+}
+
+.blog-body h3 {
+  font-size: 150%;
+}
+
+.comments {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 50px;
+}
+
+.comments h2 {
+  border-bottom: 5px solid black;
+}
+
+.comment {
+  padding: 20px;
+  border-bottom: 2px solid grey;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.comment header .comment-info {
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.comment-submit {
+  width: 70%;
+  margin-top: 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+}

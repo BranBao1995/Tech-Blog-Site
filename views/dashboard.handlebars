@@ -1,0 +1,46 @@
+<main class="dashboard-page">
+
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-list-item"><a href="/">Home</a></li>
+
+      {{#if loggedIn}}
+        {{! <li class="nav-list-item"><button id="dashboard">Dashboard</button></li> }}
+        <li class="nav-list-item"><a
+            href="/api/dashboard/{{loggedInId}}"
+          >Dashboard</a></li>
+        <li class="nav-list-item"><button id="logout">Logout</button></li>
+      {{else}}
+        <li class="nav-list-item"><a href="/login">Login/Signup</a></li>
+      {{/if}}
+    </ul>
+    <h1>The Tech Blog</h1>
+  </nav>
+  <section class="blogs-display-dashboard">
+    <button id="add-blog-button">Add a blog post</button>
+    {{#each blogs as |blog|}}
+      <div class="blog-card">
+        <a class="blog-link" href="/api/blogs/{{id}}">
+          <h1>{{title}}</h1>
+          <h2>
+            <span>Posted By {{user.username}} on {{creation_date}}</span>
+          </h2>
+          <p>{{content}}</p>
+        </a>
+      </div>
+    {{/each}}
+  </section>
+
+  <section class="form-display" style="display: none;">
+    <form id="new-blog" data-userId="{{loggedInId}}">
+      <label for="blog-title">Please enter a title</label>
+      <input type="text" id="blog-title" />
+      <label for="blog-content">Please enter content</label>
+      <input type="text" id="blog-content" />
+      <button id="add-blog-button" type="submit">Add</button>
+    </form>
+  </section>
+
+</main>
+
+<script src="/js/dashboard.js"></script>

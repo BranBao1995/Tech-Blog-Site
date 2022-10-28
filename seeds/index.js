@@ -7,7 +7,6 @@ const seedAll = async () => {
   await sequelize.sync({ force: true });
 
   await seedUser();
-
   await seedBlog();
 
   await seedComment();
