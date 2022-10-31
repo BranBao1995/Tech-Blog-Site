@@ -2,14 +2,14 @@ const blogForm = document.querySelector("#new-blog");
 const addBlogButton = document.querySelector("#add-blog-button");
 
 const renderForm = () => {
-  const blogDisplay = document.querySelector(".blog-display");
+  const blogDisplay = document.querySelector(".blogs-display-dashboard");
   const formDisplay = document.querySelector(".form-display");
   blogDisplay.style.display = "none";
   formDisplay.style.display = "block";
 };
 
 const renderBlogs = () => {
-  const blogDisplay = document.querySelector(".blog-display");
+  const blogDisplay = document.querySelector(".blogs-display-dashboard");
   const formDisplay = document.querySelector(".form-display");
 
   blogDisplay.style.display = "block";

@@ -77,8 +77,7 @@
 
 {{#if loggedIn}}
   <script src="/js/blogPost.js"></script>
+  <script src="/js/deleteBlog.js"></script>
 {{/if}}
 
-{{#ifEqual blog.user.id loggedInId}}
-  <script src="/js/deleteBlog.js"></script>
-{{/ifEqual}}
+{{!-- {{#ifEqual blog.user.id loggedInId}}{{/ifEqual}} --}}
