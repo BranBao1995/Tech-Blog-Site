@@ -24,6 +24,9 @@
 
 ## Usage
 
+- [Link to the deployed application](https://haunted-cheateau-42562.herokuapp.com/)
+- [Link to Github Repo](https://github.com/BranBao1995/Tech-Blog-Site)
+
 ## Credits
 
 - Author's Github Profile: [https://github.com/BranBao1995](https://github.com/BranBao1995)
